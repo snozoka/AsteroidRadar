@@ -40,7 +40,6 @@ private val retrofit = Retrofit.Builder()
 private val retrofit_pic = Retrofit.Builder()
     .baseUrl(picBaseURL)
     .addConverterFactory(MoshiConverterFactory.create(moshi))
-    .addCallAdapterFactory(CoroutineCallAdapterFactory())
     .build()
 
 interface NasaApiService {
@@ -52,7 +51,7 @@ interface NasaApiService {
     @GET("neo/rest/v1/feed?api_key=AZilfnHeeGQ8XeBqHcaey885EvZfP0c8oljaHnvC")
      suspend fun getNetworkAsteriods(): String
     @GET("apod?api_key=AZilfnHeeGQ8XeBqHcaey885EvZfP0c8oljaHnvC")
-    suspend fun getPicOfDayRetrofit(@Query("filter") type: String): PictureOfDay
+    suspend fun getPicOfDayRetrofit(): PictureOfDay
 }
 
 

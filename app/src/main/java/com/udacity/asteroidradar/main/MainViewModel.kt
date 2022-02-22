@@ -45,18 +45,18 @@ class MainViewModel(application: android.app.Application) : AndroidViewModel(app
 //        getNasaAsteroids()
         viewModelScope.launch {
             asteroidsRepository.convertStringToAsteroidObjects()
-            getPicOfDay(PicOfDayApiFilter.MEDIA_TYPE)
+            getPicOfDay()
             Log.i("PictureList:", _pictureEntity.value.toString())
         }
     }
     val _asteroids = asteroidsRepository.asteroids as MutableLiveData<List<Asteroid>>
 
 
-    private fun getPicOfDay(filter: PicOfDayApiFilter){
+    private fun getPicOfDay(){
         viewModelScope.launch {
             _status.value = NasaApiStatus.LOADING
             try {
-                _pictureEntity.value = NasaApi.retrofitService_pic.getPicOfDayRetrofit(filter.value)
+                _pictureEntity.value = NasaApi.retrofitService_pic.getPicOfDayRetrofit()
                 _status.value = NasaApiStatus.DONE
             }
             catch (e: Exception){
@@ -86,7 +86,7 @@ class MainViewModel(application: android.app.Application) : AndroidViewModel(app
      * @param filter the [PicOfDayApiFilter] that is sent as part of the web server request
      */
     fun updateImageFilter(filter: PicOfDayApiFilter){
-        getPicOfDay(filter)
+        getPicOfDay()
     }
 
 
