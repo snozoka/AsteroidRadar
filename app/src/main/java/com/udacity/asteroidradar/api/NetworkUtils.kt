@@ -1,24 +1,22 @@
 package com.udacity.asteroidradar.api
 
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.udacity.asteroidradar.Asteroid
+import com.udacity.asteroidradar.BuildConfig
 import com.udacity.asteroidradar.Constants
 import com.udacity.asteroidradar.PictureOfDay
-import kotlinx.coroutines.Deferred
 import org.json.JSONObject
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Query
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 enum class PicOfDayApiFilter(val value: String) { MEDIA_TYPE("image") }
+
+private const val NASA_API_KEY: String = BuildConfig.NASA_API_KEY
 
 /**
  * A public interface that exposes the [getNetworkAsteriods] method
@@ -48,9 +46,9 @@ interface NasaApiService {
      * The @GET annotation indicates that the "asteriod" endpoint will be requested with the GET
      * HTTP method
      */
-    @GET("neo/rest/v1/feed?api_key=AZilfnHeeGQ8XeBqHcaey885EvZfP0c8oljaHnvC")
+    @GET("neo/rest/v1/feed?api_key=$NASA_API_KEY")
      suspend fun getNetworkAsteriods(): String
-    @GET("apod?api_key=AZilfnHeeGQ8XeBqHcaey885EvZfP0c8oljaHnvC")
+    @GET("apod?api_key=$NASA_API_KEY")
     suspend fun getPicOfDayRetrofit(): PictureOfDay
 }
 

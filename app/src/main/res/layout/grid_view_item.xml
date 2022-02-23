@@ -45,6 +45,7 @@
                 android:id="@+id/hazardous_icon"
                 android:layout_width="96dp"
                 android:layout_height="match_parent"
+                app:statusIcon="@{asteroid.potentiallyHazardous}"
                 android:padding="16dp" />
 
         </LinearLayout>
